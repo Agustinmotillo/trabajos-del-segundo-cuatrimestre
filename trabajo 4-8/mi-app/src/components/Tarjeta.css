@@ -1,0 +1,14 @@
+.tarjeta {
+  border: 1px solid #000000;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  width: 250px;
+  margin: 20px auto;
+  background-color: #b2b2b2;
+}
+
+.tarjeta img {
+  width: 100px;
+  border-radius: 50%;
+}
