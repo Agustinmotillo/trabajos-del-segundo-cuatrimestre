@@ -1,35 +1,27 @@
-body {
-  background-color: #f8f9fa;
-}
-
-h1, h2 {
-  color: #333;
-}
-
-.card-body {
-  flex-wrap: wrap;
-}
-/* RESET TOP GAP (prueba rápida) */
 html, body, #root {
+  height: 100%;
   margin: 0;
   padding: 0;
-  height: 100%;
 }
 
-/* Wrapper de la app - asegurate de usarlo en App.jsx: <div className="app-root"> */
-.app-root,
-.app-root > .container {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-  min-height: 0 !important;
+.app-root {
+  min-height: 100%;
 }
 
-/* Evitar centrado vertical accidental */
-body, #root, .app-root, .container {
-  display: block !important;
-  align-items: stretch !important;
-  justify-content: flex-start !important;
+.container {
+  padding-top: 6px;
 }
 
-/* DEBUG VISUAL: pinta contornos para ver qué ocupa espacio (quitar luego) */
-.debug-outline * { outline: 1px dashed rgba(255,0,0,0.12); }
+.task-card {
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.task-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+@media (min-width: 768px) {
+  .task-card .card-body {
+    align-items: center;
+  }
+}

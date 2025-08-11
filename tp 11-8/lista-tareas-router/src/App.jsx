@@ -1,39 +1,85 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { initialTasks } from "./data";
 import Home from "./pages/Home";
 import TaskDetail from "./pages/TaskDetail";
 import CreateTask from "./pages/CreateTask";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles.css";
 
-function App() {
-  const [tasks, setTasks] = useState(initialTasks);
+export default function App() {
+  const [tasks, setTasks] = useState(() => {
+    const saved = localStorage.getItem("tasks_v1");
+    if (saved) return JSON.parse(saved);
+    // muestra una tarea de ejemplo si no hay nada guardado
+    return [
+      {
+        id: Date.now(),
+        titulo: "Ejemplo: Estudiar React",
+        descripcion: "Repasar hooks y enrutamiento",
+        fecha: new Date().toLocaleDateString("es-AR"),
+        completa: false
+      }
+    ];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("tasks_v1", JSON.stringify(tasks));
+  }, [tasks]);
 
   const addTask = (task) => {
-    setTasks([...tasks, { ...task, id: Date.now(), date: new Date().toISOString().split("T")[0] }]);
+    const nueva = {
+      ...task,
+      id: Date.now(),
+      fecha: new Date().toLocaleDateString("es-AR"),
+      completa: !!task.completa
+    };
+    setTasks((prev) => [nueva, ...prev]);
+  };
+
+  const updateTask = (updated) => {
+    setTasks((prev) =>
+      prev.map((t) => (t.id === updated.id ? { ...t, ...updated } : t))
+    );
   };
 
   const deleteTask = (id) => {
-    setTasks(tasks.filter((t) => t.id !== id));
+    if (!window.confirm("¿Eliminar esta tarea?")) return;
+    setTasks((prev) => prev.filter((t) => t.id !== id));
   };
 
-  const updateTask = (updatedTask) => {
-    setTasks(tasks.map((t) => (t.id === updatedTask.id ? updatedTask : t)));
+  const toggleComplete = (id) => {
+    setTasks((prev) =>
+      prev.map((t) => (t.id === id ? { ...t, completa: !t.completa } : t))
+    );
   };
 
   return (
     <Router>
-      <div className="container py-4">
-        <Routes>
-          <Route path="/" element={<Home tasks={tasks} deleteTask={deleteTask} />} />
-          <Route path="/task/:id" element={<TaskDetail tasks={tasks} />} />
-          <Route path="/create" element={<CreateTask addTask={addTask} />} />
-          <Route path="/edit/:id" element={<CreateTask addTask={addTask} updateTask={updateTask} tasks={tasks} />} />
-        </Routes>
+      <div className="app-root">
+        <div className="container mt-2">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Home
+                  tasks={tasks}
+                  deleteTask={deleteTask}
+                  toggleComplete={toggleComplete}
+                />
+              }
+            />
+            <Route path="/task/:id" element={<TaskDetail tasks={tasks} deleteTask={deleteTask} toggleComplete={toggleComplete} />} />
+            <Route
+              path="/create"
+              element={<CreateTask addTask={addTask} />}
+            />
+            <Route
+              path="/edit/:id"
+              element={<CreateTask updateTask={updateTask} tasks={tasks} />}
+            />
+          </Routes>
+        </div>
       </div>
     </Router>
   );
 }
-
-export default App;

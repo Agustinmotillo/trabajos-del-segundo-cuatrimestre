@@ -1,43 +1,61 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-function CreateTask({ addTask, updateTask, tasks }) {
+export default function CreateTask({ addTask, updateTask, tasks = [] }) {
   const { id } = useParams();
+  const editing = !!id;
   const navigate = useNavigate();
 
-  const editing = Boolean(id);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [completed, setCompleted] = useState(false);
+  const [titulo, setTitulo] = useState("");
+  const [descripcion, setDescripcion] = useState("");
+  const [completa, setCompleta] = useState(false);
+
+  const [errors, setErrors] = useState({ titulo: "", descripcion: "" });
 
   useEffect(() => {
     if (editing) {
-      const taskToEdit = tasks.find((t) => t.id === Number(id));
-      if (taskToEdit) {
-        setTitle(taskToEdit.title);
-        setDescription(taskToEdit.description);
-        setCompleted(taskToEdit.completed);
+      const t = tasks.find((x) => x.id === Number(id));
+      if (t) {
+        setTitulo(t.titulo);
+        setDescripcion(t.descripcion);
+        setCompleta(!!t.completa);
       }
     }
   }, [editing, id, tasks]);
 
-  const validateText = (text) => /^[^\d]*$/.test(text); // no números
+  const validateAll = () => {
+    const newErr = { titulo: "", descripcion: "" };
+    const hasNumber = /\d/;
+
+    if (!titulo.trim()) newErr.titulo = "El título es obligatorio.";
+    else if (hasNumber.test(titulo)) newErr.titulo = "El título NO puede contener números.";
+
+    if (!descripcion.trim()) newErr.descripcion = "La descripción es obligatoria.";
+    else if (hasNumber.test(descripcion)) newErr.descripcion = "La descripción NO puede contener números.";
+
+    setErrors(newErr);
+    return !newErr.titulo && !newErr.descripcion;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!title.trim() || !description.trim()) {
-      alert("Todos los campos son obligatorios");
-      return;
-    }
-    if (!validateText(title) || !validateText(description)) {
-      alert("No se permiten números en título o descripción");
-      return;
-    }
+    if (!validateAll()) return;
 
     if (editing) {
-      updateTask({ id: Number(id), title, description, completed, date: new Date().toISOString().split("T")[0] });
+      updateTask({
+        id: Number(id),
+        titulo: titulo.trim(),
+        descripcion: descripcion.trim(),
+        completa,
+        // mantener la fecha original si existe:
+        fecha: (tasks.find((x) => x.id === Number(id)) || {}).fecha || new Date().toLocaleDateString("es-AR")
+      });
     } else {
-      addTask({ title, description, completed });
+      addTask({
+        titulo: titulo.trim(),
+        descripcion: descripcion.trim(),
+        completa
+      });
     }
     navigate("/");
   };
@@ -45,42 +63,51 @@ function CreateTask({ addTask, updateTask, tasks }) {
   return (
     <div>
       <h2>{editing ? "Editar tarea" : "Crear nueva tarea"}</h2>
-      <form onSubmit={handleSubmit} className="mt-3">
+
+      <form onSubmit={handleSubmit} noValidate className="mt-3">
         <div className="mb-3">
           <label className="form-label">Título</label>
           <input
-            type="text"
-            className="form-control"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
+            className={`form-control ${errors.titulo ? "is-invalid" : ""}`}
+            value={titulo}
+            onChange={(e) => setTitulo(e.target.value)}
           />
+          {errors.titulo && <div className="invalid-feedback">{errors.titulo}</div>}
         </div>
+
         <div className="mb-3">
           <label className="form-label">Descripción</label>
           <textarea
-            className="form-control"
-            rows="3"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
+            className={`form-control ${errors.descripcion ? "is-invalid" : ""}`}
+            rows={4}
+            value={descripcion}
+            onChange={(e) => setDescripcion(e.target.value)}
           />
+          {errors.descripcion && <div className="invalid-feedback">{errors.descripcion}</div>}
         </div>
+
         <div className="form-check mb-3">
           <input
-            className="form-check-input"
+            id="completa"
             type="checkbox"
-            checked={completed}
-            onChange={(e) => setCompleted(e.target.checked)}
+            className="form-check-input"
+            checked={completa}
+            onChange={(e) => setCompleta(e.target.checked)}
           />
-          <label className="form-check-label">¿Completada?</label>
+          <label className="form-check-label" htmlFor="completa">
+            ¿Tarea completada?
+          </label>
         </div>
-        <button type="submit" className="btn btn-primary">
-          {editing ? "Guardar cambios" : "Guardar tarea"}
-        </button>
+
+        <div className="d-flex gap-2">
+          <button type="submit" className="btn btn-primary">
+            {editing ? "Guardar cambios" : "Crear tarea"}
+          </button>
+          <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)}>
+            Cancelar
+          </button>
+        </div>
       </form>
     </div>
   );
 }
-
-export default CreateTask;
