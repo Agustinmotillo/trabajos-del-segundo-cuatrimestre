@@ -1,0 +1,133 @@
+/* --- Modal & botones para Editar (pegar al final de src/styles.css) --- */
+
+.section-card {
+  margin-bottom: 24px;
+}
+
+/* Header sección con botón Editar al costado */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* Botón Editar pequeño */
+.edit-btn {
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  border: 1px solid #d0d0d0;
+  background: #ffffff;
+  cursor: pointer;
+  transition: transform .1s ease, box-shadow .1s ease;
+}
+.edit-btn:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+
+/* Listas */
+.skills-list, .projects-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  padding-left: 0;
+  list-style: none;
+}
+.skill-item, .project-item {
+  background: #f4f6f8;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+/* Modal overlay y ventana */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.modal {
+  width: 440px;
+  max-width: 94%;
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+/* Top row modal */
+.modal-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-top h3 { margin: 0; font-size: 1.1rem; }
+.close-btn {
+  border: none;
+  background: transparent;
+  font-size: 1.25rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* Inputs y botones */
+.modal-input {
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+}
+.primary-btn {
+  background: #0b74ff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.secondary-btn {
+  background: transparent;
+  color: #333;
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Lista interna del modal */
+.modal-list {
+  margin-top: 12px;
+  padding-left: 0;
+  list-style: none;
+  max-height: 240px;
+  overflow: auto;
+}
+.modal-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 6px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.small-delete {
+  background: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+.small-delete:hover { opacity: 0.95; }
+
+.url-small {
+  font-size: 0.8rem;
+  color: #666;
+  margin-left: 8px;
+}

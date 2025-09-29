@@ -1,0 +1,412 @@
+/* Reset y body */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; /* evita scroll horizontal */
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: #e0e0e0;
+  scroll-behavior: smooth;
+}
+
+/* Header futurista */
+header {
+  position: sticky;
+  top: 0;
+  background: rgba(20, 20, 30, 0.95);
+  color: #ffffff;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  color: #00ffff;
+  text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+}
+
+header nav a {
+  color: #ffffff;
+  margin: 0 12px;
+  text-decoration: none;
+  position: relative;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+header nav a::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: #00ffff;
+  left: 0;
+  bottom: -4px;
+  transition: 0.3s;
+}
+
+header nav a:hover::after {
+  width: 100%;
+}
+
+header nav a:hover {
+  color: #00ffff;
+}
+
+/* Secciones */
+.section {
+  padding: 4rem 2rem;
+  text-align: center;
+  background: rgba(255,255,255,0.05);
+  margin: 1rem auto;
+  border-radius: 15px;
+  max-width: 1000px;
+  box-shadow: 0 0 30px rgba(0,255,255,0.1);
+  backdrop-filter: blur(5px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  scroll-margin-top: 100px;
+}
+
+.section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 50px rgba(0,255,255,0.2);
+}
+
+/* Skills y proyectos centrados */
+.skills-list, .projects-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  padding-left: 0;
+  list-style: none;
+  justify-content: center;
+}
+
+.skill-item, .project-item {
+  background: #ffffff;
+  color: #0f0c29;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-align: center;
+  word-break: break-word;
+  max-width: 100%;
+}
+
+/* Botones de habilidades */
+.skill-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(0,255,255,0.1);
+  color: #00ffff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 0 10px rgba(0,255,255,0.2);
+}
+
+.skill-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px #00ffff;
+}
+
+.skill-btn.active {
+  background: #00ffff;
+  color: #0f0c29;
+  box-shadow: 0 0 25px #00ffff;
+}
+
+/* Links en sección Proyectos y otros links */
+.section a {
+  color: #00ffff;
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+  transition: 0.3s;
+}
+
+.section a::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: #00ffff;
+  left: 0;
+  bottom: -3px;
+  transition: 0.3s;
+}
+
+.section a:hover::after {
+  width: 100%;
+}
+
+.section a:hover {
+  text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+  transform: scale(1.05);
+}
+
+/* Contact Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+.contact-form input,
+.contact-form textarea,
+.contact-form button {
+  width: 100%;
+  max-width: 100%;
+  padding: 12px 15px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.1);
+  color: #e0e0e0;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.3s;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #a0a0a0;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  background: rgba(0,255,255,0.1);
+  box-shadow: 0 0 15px #00ffff;
+  color: #ffffff;
+}
+
+.contact-form button {
+  background: #00ffff;
+  color: #0f0c29;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.contact-form button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #00ffff;
+}
+
+/* Mensaje de éxito */
+.contact-success {
+  margin-top: 10px;
+  color: #00ffcc;
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.contact-success.show {
+  opacity: 1;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2rem;
+  color: #00ffff;
+  background: rgba(20,20,30,0.95);
+  box-shadow: 0 -4px 30px rgba(0,0,0,0.5);
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+/* Modal & botones para Editar */
+.section-card {
+  margin-bottom: 24px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+}
+
+.edit-btn {
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  border: 1px solid #ffffff;
+  background: #ffffff;
+  cursor: pointer;
+  transition: transform .1s ease, box-shadow .1s ease;
+  position: absolute;
+  right: 0;
+}
+.edit-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* Modal overlay y ventana */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.modal {
+  width: 440px;
+  max-width: 90%;
+  background: #0f0c29;
+  border-radius: 12px;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.modal-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-top h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.close-btn {
+  border: none;
+  background: transparent;
+  font-size: 1.25rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* Inputs y botones del modal */
+.modal-input {
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+}
+.primary-btn {
+  background: #0b74ff;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.secondary-btn {
+  background: transparent;
+  color: #fff;
+  border: 1px solid #ffffff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Lista interna del modal */
+.modal-list {
+  margin-top: 12px;
+  padding-left: 0;
+  list-style: none;
+  max-height: 240px;
+  overflow: auto;
+}
+.modal-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 6px;
+  border-bottom: 1px solid #ffffff;
+}
+.small-delete {
+  background: #ff4d4f;
+  color: #fff;
+  border: none;
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+.small-delete:hover {
+  opacity: 0.95;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 20px;
+  }
+
+  header nav {
+    margin-top: 10px;
+  }
+
+  header nav a {
+    margin-left: 0;
+    margin-right: 15px;
+  }
+
+  .section {
+    padding: 3rem 1rem;
+  }
+
+  .skill-btn {
+    padding: 10px 18px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  .skill-btn {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+
+  .section-header {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .edit-btn {
+    position: static;
+    align-self: center;
+  }
+}
