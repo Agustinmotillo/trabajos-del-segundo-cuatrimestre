@@ -1,0 +1,60 @@
+import { StyleSheet } from "react-native";
+
+export const loginStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#0f0c29",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 16,
+  },
+  card: {
+    width: "92%",
+    maxWidth: 420,
+    backgroundColor: "rgba(20,20,30,0.9)",
+    borderRadius: 18,
+    padding: 18,
+    shadowColor: "#000",
+    shadowOpacity: 0.25,
+    shadowOffset: { width: 0, height: 8 },
+    shadowRadius: 12,
+    elevation: 6,
+  },
+  title: {
+    color: "#fff",
+    fontSize: 20,
+    fontWeight: "700",
+    marginBottom: 12,
+  },
+  input: {
+    backgroundColor: "#1d1f33",
+    color: "#e0e0e0",
+    borderRadius: 12,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.08)",
+  },
+  button: {
+    backgroundColor: "#5b86e5",
+    borderRadius: 12,
+    paddingVertical: 12,
+    alignItems: "center",
+    marginTop: 6,
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "700",
+  },
+  errorBox: {
+    backgroundColor: "rgba(255,0,72,0.12)",
+    borderColor: "rgba(255,0,72,0.4)",
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 8,
+  },
+  errorText: { color: "#ff5c7a" },
+});
