@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "VetApp",
+    "slug": "vet-app",
+    "scheme": "vetapp",
+    "sdkVersion": "51.0.0",
+    "orientation": "portrait",
+    "platforms": ["ios", "android", "web"],
+    "web": { "bundler": "metro" }
+  }
+}
